@@ -1,0 +1,91 @@
+<header>
+	<div>
+		<h2>Dynamic Filter App</h2>
+	</div>
+</header>
+<div id="container">
+	<main>
+		<section class="half">
+			<!-- Table select -->
+
+			<div class="select-field">
+				<mat-form-field>
+					<mat-label>Entitites</mat-label>
+					<mat-select [formControl]="entityControl" (selectionChange)="changeEntity($event.value)">
+						<mat-option *ngFor="let entity of entities" [value]="entity.value">
+							{{ entity.viewValue }}
+						</mat-option>
+					</mat-select>
+					<mat-error *ngIf="entityControl.hasError('required')">Please choose an entity</mat-error>
+				</mat-form-field>
+			</div>
+
+			<section *ngFor="let Count of Count;let i = index;" class="inner">
+
+				<!-- From select -->
+
+				<div class="select-field-group">
+
+					<p class="from">
+						<mat-form-field>
+							<mat-label>Attribuite</mat-label>
+							<mat-select [formControl]="entityControl" (selectionChange)="changeAttr($event.value, i)">
+								<mat-option *ngFor="let entity of attrs" [value]="entity.value">
+									{{ entity.viewValue }}
+								</mat-option>
+							</mat-select>
+							<mat-error *ngIf="entityControl.hasError('required')">Please choose an entity</mat-error>
+						</mat-form-field>
+					</p>
+
+					<p class="relation">
+						<mat-form-field>
+							<mat-label>Relation</mat-label>
+							<mat-select [formControl]="entityControl" (selectionChange)="changeReln($event.value, i)">
+								<mat-option *ngFor="let entity of reln" [value]="entity.value">
+									{{ entity.viewValue }}
+								</mat-option>
+							</mat-select>
+							<mat-error *ngIf="entityControl.hasError('required')">Please choose an entity</mat-error>
+						</mat-form-field>
+					</p>
+
+
+					<p class="textf">
+						<mat-form-field class="tp-full-width">
+							<input matInput placeholder = "Value" value = "" #box (keyup.enter)="changeValue(box.value)">
+                 </mat-form-field>
+					</p>
+
+
+					<p class="and-or">
+						<mat-form-field>
+							<mat-label>And/Or</mat-label>
+							<mat-select [formControl]="entityControl" (selectionChange)="changeAndOr($event.value, i)">
+								<mat-option *ngFor="let entity of ador" [value]="entity.value">
+									{{ entity.viewValue }}
+								</mat-option>
+							</mat-select>
+							<mat-error *ngIf="entityControl.hasError('required')">Please choose an entity</mat-error>
+						</mat-form-field>
+					</p>
+
+				</div>
+			</section>
+      <p class="btns">
+			<button mat-raised-button class="add-btn" type="submit" (click)="add()">+</button>
+      <button mat-raised-button class="add-btn" type="submit" (click)="sub()">-</button>
+      <button mat-raised-button class="add-btn" type="submit" >Submit</button>
+      <button mat-raised-button class="add-btn" type="submit" (click)="refresh()">Refresh</button>
+      </p>
+      <br><br>
+		</section>
+		<br>
+		<section class="half">
+		</section>
+	</main>
+</div>
+
+
+
+<!--<app-user-table></app-user-table>-->
