@@ -28,9 +28,9 @@
 
 					<p class="from">
 						<mat-form-field>
-							<mat-label>Attribuite</mat-label>
+							<mat-label>Feild</mat-label>
 							<mat-select [formControl]="entityControl" (selectionChange)="changeAttr($event.value, i)">
-								<mat-option *ngFor="let entity of attrs" [value]="entity.value">
+								<mat-option *ngFor="let entity of attrs1" [value]="entity.value">
 									{{ entity.viewValue }}
 								</mat-option>
 							</mat-select>
@@ -52,8 +52,8 @@
 
 
 					<p class="textf">
-						<mat-form-field class="tp-full-width">
-							<input matInput placeholder = "Value" value = "" #box (keyup.enter)="changeValue(box.value)">
+						<mat-form-field class="tp-full-width" appearance="outline">
+							<input matInput placeholder = "Value" value = "" #box (keyup.enter)="changeValue(box.value,i )">
                  </mat-form-field>
 					</p>
 
@@ -66,7 +66,6 @@
 									{{ entity.viewValue }}
 								</mat-option>
 							</mat-select>
-							<mat-error *ngIf="entityControl.hasError('required')">Please choose an entity</mat-error>
 						</mat-form-field>
 					</p>
 
@@ -75,13 +74,35 @@
       <p class="btns">
 			<button mat-raised-button class="add-btn" type="submit" (click)="add()">+</button>
       <button mat-raised-button class="add-btn" type="submit" (click)="sub()">-</button>
-      <button mat-raised-button class="add-btn" type="submit" >Submit</button>
-      <button mat-raised-button class="add-btn" type="submit" (click)="refresh()">Refresh</button>
+      <button mat-raised-button class="add-btn" type="submit" (click)="postQuery()">Submit</button>
+      <button mat-raised-button class="add-btn" type="submit" (click)="refresh()">Clear</button>
       </p>
       <br><br>
 		</section>
 		<br>
 		<section class="half">
+			<div *ngIf="Hell" class="container">
+				<table class="table table-striped">
+				  <thead>
+					  <tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Stock</th>
+						<th>Type</th>
+					  </tr>
+				  </thead>
+				  <tbody>
+					<tr *ngFor="let ret_data of ret_data">
+					  <td>{{ ret_data.id }}</td>
+					  <td>{{ ret_data.name }}</td>
+					  <td>{{ ret_data.price }}</td>
+					  <td>{{ ret_data.stock||ret_data.quantity }}</td>
+					  <td>{{ ret_data.type||ret_data.make|| ret_data.expiry }}</td>
+					</tr>
+				  </tbody>
+				</table>
+			  </div>
 		</section>
 	</main>
 </div>
